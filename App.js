@@ -116,6 +116,7 @@ export default class TodoList extends Component {
                   <Button
                     title="X"
                     onPress={() => this.deleteTask(index, item.key)}
+                    color="red"
                   />
                 </View>
                 <View style={styles.hr} />
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#F5FCFF",
+    backgroundColor: "white",
     padding: viewPadding,
     paddingTop: 20
   },
