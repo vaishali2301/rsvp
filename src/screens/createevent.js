@@ -10,8 +10,9 @@ import {
   TouchableHighlight,
   Alert
 } from "react-native";
-export default class Create extends Component {
+export default class Create extends React.Component {
   render() {
+    const { navigate } = this.props.navigation;
     return (
       <View>
         <Text style={styles.heading}>Let's Get Started!!</Text>
@@ -36,6 +37,7 @@ export default class Create extends Component {
         >
           <Button
             title="Create an event"
+            onPress={() => navigate("NewEvent")}
             color="white"
             alignItems="center"
             accessibilityLabel="Learn more about this button"
@@ -59,6 +61,7 @@ export default class Create extends Component {
         >
           <Button
             title="Existing events"
+            onPress={() => navigate("ExistingEvent")}
             color="white"
             alignItems="center"
             accessibilityLabel="Learn more about this button"

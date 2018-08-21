@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import firebase from "react-native-firebase";
 import { AppRegistry, StyleSheet, Text, View } from "react-native";
 import Login from "./src/screens/login";
 import Secured from "./src/screens/secured";
@@ -23,23 +24,35 @@ import Counter from "./src/screens/counter";
 import Card from "./src/screens/card";
 import Eventlist from "./src/screens/eventlist";
 import Events from "./src/screens/events";
+import PhoneAuthTest from "./src/screens/phoneauth";
+import HomeScreen from "./src/navigate/home";
+import ProfileScreen from "./src/navigate/profile";
+import { createStackNavigator } from "react-navigation";
+const App = createStackNavigator({
+  Phone: { screen: PhoneAuthTest },
+  Creating: { screen: Create },
+  NewEvent: { screen: Calen },
+  ExistingEvent: { screen: Events }
+});
 
-export default class Rsvp extends Component {
-  state = {
-    isLoggedIn: false
-  };
+export default App;
 
-  render() {
-    return (
-      <View>
-        <Events />
-      </View>
-    );
-    // if (this.state.isLoggedIn)
-    //   return (
-    //     <Secured onLogoutPress={() => this.setState({ isLoggedIn: false })} />
-    //   );
-    // else
-    //   return <Login onLoginPress={() => this.setState({ isLoggedIn: true })} />;
-  }
-}
+// export default class Rsvp extends Component {
+// state = {
+//   isLoggedIn: false
+// };
+
+// render() {
+//   return (
+//     <View>
+//       <Calen />
+//     </View>
+//   );
+// if (this.state.isLoggedIn)
+//   return (
+//     <Secured onLogoutPress={() => this.setState({ isLoggedIn: false })} />
+//   );
+// else
+//   return <Login onLoginPress={() => this.setState({ isLoggedIn: true })} />;
+//   }
+// }
