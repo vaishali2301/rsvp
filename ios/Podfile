@@ -12,6 +12,8 @@ target 'rsvp' do
   target 'rsvp-tvOSTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'react-native-contacts', :path => '../node_modules/react-native-contacts'
+
   end
 
   target 'rsvpTests' do

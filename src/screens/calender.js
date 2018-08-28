@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { Calendar, CalendarList, LocaleConfig } from "react-native-calendars";
-import {
-  View,
-  Modal,
-  Alert,
-  Text,
-  TouchableHighlight,
-  StyleSheet,
-  TouchableOpacity,
-  TextInput
-} from "react-native";
-import { Picker } from "react-native";
-import DateTimePicker from "react-native-modal-datetime-picker";
+// import React, { Component } from "react";
+// import { Calendar, CalendarList, LocaleConfig } from "react-native-calendars";
+// import {
+//   View,
+//   Modal,
+//   Alert,
+//   Text,
+//   TouchableHighlight,
+//   StyleSheet,
+//   TouchableOpacity,
+//   TextInput
+// } from "react-native";
+// import { Picker } from "react-native";
+// import DateTimePicker from "react-native-modal-datetime-picker";
 
 // let themesObject = {
 //   christmas: {
@@ -62,198 +62,198 @@ import DateTimePicker from "react-native-modal-datetime-picker";
 //     subtext: "Let us Celebrate!"
 //   }
 // };
-LocaleConfig.locales["fr"] = {
-  monthNames: [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ],
-  monthNamesShort: [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "Jun",
-    "Jul",
-    "Aug",
-    "Sep",
-    "Oct",
-    "Nov",
-    "Dec"
-  ],
-  dayNames: [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday"
-  ],
-  dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
-};
+// LocaleConfig.locales["fr"] = {
+//   monthNames: [
+//     "January",
+//     "February",
+//     "March",
+//     "April",
+//     "May",
+//     "June",
+//     "July",
+//     "August",
+//     "September",
+//     "October",
+//     "November",
+//     "December"
+//   ],
+//   monthNamesShort: [
+//     "Jan",
+//     "Feb",
+//     "Mar",
+//     "Apr",
+//     "May",
+//     "Jun",
+//     "Jul",
+//     "Aug",
+//     "Sep",
+//     "Oct",
+//     "Nov",
+//     "Dec"
+//   ],
+//   dayNames: [
+//     "Sunday",
+//     "Monday",
+//     "Tuesday",
+//     "Wednesday",
+//     "Thursday",
+//     "Friday",
+//     "Saturday"
+//   ],
+//   dayNamesShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+// };
 
-LocaleConfig.defaultLocale = "fr";
-export default class Calen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modalVisible: false,
-      isDateTimePickerVisible: false,
-      day: null,
-      party: ""
-    };
-  }
+// LocaleConfig.defaultLocale = "fr";
+// export default class Calen extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = {
+//       modalVisible: false,
+//       isDateTimePickerVisible: false,
+//       day: null,
+//       party: ""
+//     };
+//   }
 
-  toggleModal(visible) {
-    this.setState({ modalVisible: visible });
-  }
-  _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
+//   toggleModal(visible) {
+//     this.setState({ modalVisible: visible });
+//   }
+//   _showDateTimePicker = () => this.setState({ isDateTimePickerVisible: true });
 
-  _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
-  _handleDatePicked = date => {
-    console.log("A date has been picked: ", date);
-    this._hideDateTimePicker();
-  };
-  render() {
-    state = {
-      party: ""
-    };
-    console.log(this.state);
-    return (
-      <View>
-        <CalendarList
-          onVisibleMonthsChange={months => {
-            // Callback which gets executed when visible months change in scroll view. Default = undefined
-            console.log("now these months are visible", months);
-          }}
-          pastScrollRange={
-            50 // Max amount of months allowed to scroll to the past. Default = 50
-          }
-          futureScrollRange={
-            50 // Max amount of months allowed to scroll to the future. Default = 50
-          }
-          scrollEnabled={
-            true // Enable or disable scrolling of calendar list
-          }
-          showScrollIndicator={
-            true // Enable or disable vertical scroll indicator. Default = false
-          }
-          onDayPress={day => {
-            this.toggleModal(!this.state.modalVisible);
-            console.log("selected day", day);
-            this.setState({ day: day.dateString });
+//   _hideDateTimePicker = () => this.setState({ isDateTimePickerVisible: false });
+//   _handleDatePicked = date => {
+//     console.log("A date has been picked: ", date);
+//     this._hideDateTimePicker();
+//   };
+//   render() {
+//     state = {
+//       party: ""
+//     };
+//     console.log(this.state);
+//     return (
+//       <View>
+//         <CalendarList
+//           onVisibleMonthsChange={months => {
+//             // Callback which gets executed when visible months change in scroll view. Default = undefined
+//             console.log("now these months are visible", months);
+//           }}
+//           pastScrollRange={
+//             50 // Max amount of months allowed to scroll to the past. Default = 50
+//           }
+//           futureScrollRange={
+//             50 // Max amount of months allowed to scroll to the future. Default = 50
+//           }
+//           scrollEnabled={
+//             true // Enable or disable scrolling of calendar list
+//           }
+//           showScrollIndicator={
+//             true // Enable or disable vertical scroll indicator. Default = false
+//           }
+//           onDayPress={day => {
+//             this.toggleModal(!this.state.modalVisible);
+//             console.log("selected day", day);
+//             this.setState({ day: day.dateString });
 
-            //Alert.alert(day.dateString, "hi");
-          }}
-        />
-        <Modal
-          animationType={"slide"}
-          transparent={false}
-          visible={this.state.modalVisible}
-          onRequestClose={() => {
-            console.log("Modal has been closed.");
-          }}
-        >
-          <View style={styles.modal}>
-            {<Text style={styles.heading}>Confirm event details!{"\n"}</Text>}
-            <Text>Your event date is: {this.state.day}</Text>
-            <View style={{ flex: 1, height: 50, width: 200 }}>
-              <Picker
-                selectedValue={this.state.party}
-                onValueChange={(itemValue, itemIndex) =>
-                  this.setState({
-                    party: itemValue
-                  })
-                }
-              >
-                <Picker.Item label="Birthday" value="birthday" />
-                <Picker.Item label="Anniversary" value="anniversary" />
-                <Picker.Item label="Wedding" value="wedding" />
-                <Picker.Item label="BabyShower" value="babyshower" />
-                <Picker.Item label="ClassReunion" value="classreunion" />
-                <Picker.Item label="NewYearParty" value="newyear" />
-                <Picker.Item label="ChristmasParty" value="christmas" />
-                <Picker.Item label="ValentinesDay" value="valentine" />
-              </Picker>
-            </View>
-            <TextInput
-              style={styles.TextInput}
-              placeholder="Enter event name"
-            />
-            <TouchableOpacity onPress={this._showDateTimePicker}>
-              <Text style={styles.text}>Pick Event Time</Text>
-            </TouchableOpacity>
-            <DateTimePicker
-              mode="time"
-              isVisible={this.state.isDateTimePickerVisible}
-              onConfirm={this._handleDatePicked}
-              onCancel={this._hideDateTimePicker}
-            />
+//             //Alert.alert(day.dateString, "hi");
+//           }}
+//         />
+//         <Modal
+//           animationType={"slide"}
+//           transparent={false}
+//           visible={this.state.modalVisible}
+//           onRequestClose={() => {
+//             console.log("Modal has been closed.");
+//           }}
+//         >
+//           <View style={styles.modal}>
+//             {<Text style={styles.heading}>Confirm event details!{"\n"}</Text>}
+//             <Text>Your event date is: {this.state.day}</Text>
+//             <View style={{ flex: 1, height: 50, width: 200 }}>
+//               <Picker
+//                 selectedValue={this.state.party}
+//                 onValueChange={(itemValue, itemIndex) =>
+//                   this.setState({
+//                     party: itemValue
+//                   })
+//                 }
+//               >
+//                 <Picker.Item label="Birthday" value="birthday" />
+//                 <Picker.Item label="Anniversary" value="anniversary" />
+//                 <Picker.Item label="Wedding" value="wedding" />
+//                 <Picker.Item label="BabyShower" value="babyshower" />
+//                 <Picker.Item label="ClassReunion" value="classreunion" />
+//                 <Picker.Item label="NewYearParty" value="newyear" />
+//                 <Picker.Item label="ChristmasParty" value="christmas" />
+//                 <Picker.Item label="ValentinesDay" value="valentine" />
+//               </Picker>
+//             </View>
+//             <TextInput
+//               style={styles.TextInput}
+//               placeholder="Enter event name"
+//             />
+//             <TouchableOpacity onPress={this._showDateTimePicker}>
+//               <Text style={styles.text}>Pick Event Time</Text>
+//             </TouchableOpacity>
+//             <DateTimePicker
+//               mode="time"
+//               isVisible={this.state.isDateTimePickerVisible}
+//               onConfirm={this._handleDatePicked}
+//               onCancel={this._hideDateTimePicker}
+//             />
 
-            <TouchableHighlight
-              onPress={() => {
-                this.toggleModal(!this.state.modalVisible);
-              }}
-            >
-              <Text style={styles.text}>Submit Event</Text>
-            </TouchableHighlight>
-          </View>
-        </Modal>
+//             <TouchableHighlight
+//               onPress={() => {
+//                 this.toggleModal(!this.state.modalVisible);
+//               }}
+//             >
+//               <Text style={styles.text}>Submit Event</Text>
+//             </TouchableHighlight>
+//           </View>
+//         </Modal>
 
-        <TouchableHighlight
-          onPress={() => {
-            this.toggleModal(true);
-          }}
-        >
-          <Text style={styles.text}>Open Modal</Text>
-        </TouchableHighlight>
-      </View>
-    );
-  }
-}
-const styles = StyleSheet.create({
-  container: {
-    alignItems: "center",
-    padding: 100
-  },
-  modal: {
-    flex: 1,
-    alignItems: "center",
-    backgroundColor: "#f0fff0",
-    padding: 20
-  },
-  text: {
-    color: "black",
-    marginTop: 50,
-    borderColor: "black",
-    borderWidth: 2,
-    fontSize: 15,
-    fontFamily: "Courier-Oblique",
-    alignItems: "center"
-  },
-  TextInput: {
-    height: 40,
-    paddingRight: 10,
-    paddingLeft: 10,
-    borderColor: "black",
-    borderWidth: 2,
-    width: "100%",
-    marginTop: 10
-  },
-  heading: {
-    fontFamily: "Cochin",
-    fontSize: 20,
-    fontWeight: "bold"
-  }
-});
+//         <TouchableHighlight
+//           onPress={() => {
+//             this.toggleModal(true);
+//           }}
+//         >
+//           <Text style={styles.text}>Open Modal</Text>
+//         </TouchableHighlight>
+//       </View>
+//     );
+//   }
+// }
+// const styles = StyleSheet.create({
+//   container: {
+//     alignItems: "center",
+//     padding: 100
+//   },
+//   modal: {
+//     flex: 1,
+//     alignItems: "center",
+//     backgroundColor: "#f0fff0",
+//     padding: 20
+//   },
+//   text: {
+//     color: "black",
+//     marginTop: 50,
+//     borderColor: "black",
+//     borderWidth: 2,
+//     fontSize: 15,
+//     fontFamily: "Courier-Oblique",
+//     alignItems: "center"
+//   },
+//   TextInput: {
+//     height: 40,
+//     paddingRight: 10,
+//     paddingLeft: 10,
+//     borderColor: "black",
+//     borderWidth: 2,
+//     width: "100%",
+//     marginTop: 10
+//   },
+//   heading: {
+//     fontFamily: "Cochin",
+//     fontSize: 20,
+//     fontWeight: "bold"
+//   }
+// });

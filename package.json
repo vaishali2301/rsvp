@@ -10,14 +10,14 @@
     "@types/react-native": "^0.56.7",
     "@types/react-native-calendars": "^1.20.1",
     "firebase": "^5.3.1",
+    "native-base": "^2.7.2",
     "react": "^16.4.1",
     "react-live-clock": "^2.0.3",
-    "react-native": "0.56.0",
+    "react-native": "^0.56.0",
     "react-native-calendars": "^1.20.0",
+    "react-native-contacts": "^2.2.2",
     "react-native-firebase": "^4.3.8",
     "react-native-material-dropdown": "^0.11.1",
-    "react-native-modal-datetime-picker": "^6.0.0",
-    "react-native-timepicker": "^1.0.3",
     "react-navigation": "^2.11.2"
   },
   "devDependencies": {

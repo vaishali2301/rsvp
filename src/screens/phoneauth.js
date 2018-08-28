@@ -89,15 +89,24 @@ export default class PhoneAuthTest extends React.Component {
   renderPhoneNumberInput() {
     const { phoneNumber } = this.state;
 
-    return <View style={{}}>
-        <Image style={{ width: 350, height: 300, justifyContent: "space-evenly" }} source={require("../../RSVP_title.png")} />
+    return (
+      <View style={{}}>
+        <Image
+          style={{ width: 350, height: 300, justifyContent: "space-evenly" }}
+          source={require("../../RSVP_title.png")}
+        />
         <Text style={{ textAlign: "center" }}>Enter phone number:</Text>
-        <TextInput autoFocus style={{ height: 40,textAlign: "center" }} onChangeText={value => this.setState(
-              { phoneNumber: value }
-            )} placeholder={"Phone number ... "} value={phoneNumber} />
+        <TextInput
+          autoFocus
+          style={{ height: 40, textAlign: "center" }}
+          onChangeText={value => this.setState({ phoneNumber: value })}
+          placeholder={"Phone number ... "}
+          value={phoneNumber}
+        />
 
         <Button title="Sign In" color="green" onPress={this.signIn} />
-      </View>;
+      </View>
+    );
   }
 
   renderMessage() {
@@ -169,7 +178,11 @@ export default class PhoneAuthTest extends React.Component {
             <Button
               title="Continue"
               color="red"
-              onPress={() => navigate("Creating")}
+              onPress={() =>
+                this.state.user.displayName
+                  ? navigate("Groups")
+                  : navigate("Profile")
+              }
             />
             <Button title="Sign Out" color="red" onPress={this.signOut} />
           </View>

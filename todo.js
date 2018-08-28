@@ -69,8 +69,8 @@ export default class TodoList extends Component {
 
     // db.collection("users").add({
     //   first: "Vaishali",
-    //   last: "Lovelace",
-    //   born: 1815
+    //   last: "Anand",
+    //   born: 1997
     // });
     // var Ref = db.collection("users").doc("7ndbdtCUsFnvcvEbdV2F");
     // Ref.delete()
