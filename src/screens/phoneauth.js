@@ -92,8 +92,11 @@ export default class PhoneAuthTest extends React.Component {
     return (
       <View style={{}}>
         <Image
-          style={{ width: 350, height: 300, justifyContent: "space-evenly" }}
-          source={require("../../RSVP_title.png")}
+          style={{ width: 300, height: 300, justifyContent: "center" }}
+          source={{
+            uri:
+              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE_Pp2ua7E3xjyle0ASm2FPgX-Uu8ClAwqyIuerjimbn1phB0Z"
+          }}
         />
         <Text style={{ textAlign: "center" }}>Enter phone number:</Text>
         <TextInput

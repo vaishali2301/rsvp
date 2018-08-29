@@ -7,6 +7,9 @@ PODS:
     - FirebaseAnalytics (= 5.0.1)
   - Firebase/CoreOnly (5.3.0):
     - FirebaseCore (= 5.0.4)
+  - Firebase/Messaging (5.3.0):
+    - Firebase/CoreOnly
+    - FirebaseMessaging (= 3.0.2)
   - FirebaseAnalytics (5.0.1):
     - FirebaseCore (~> 5.0)
     - FirebaseInstanceID (~> 3.0)
@@ -19,7 +22,14 @@ PODS:
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
   - FirebaseInstanceID (3.1.1):
     - FirebaseCore (~> 5.0)
+  - FirebaseMessaging (3.0.2):
+    - FirebaseCore (~> 5.0)
+    - FirebaseInstanceID (~> 3.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - Protobuf (~> 3.1)
   - GoogleToolboxForMac/Defines (2.1.4)
+  - GoogleToolboxForMac/Logger (2.1.4):
+    - GoogleToolboxForMac/Defines (= 2.1.4)
   - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - GTMSessionFetcher/Core (1.2.0)
@@ -28,10 +38,18 @@ PODS:
     - nanopb/encode (= 0.3.8)
   - nanopb/decode (0.3.8)
   - nanopb/encode (0.3.8)
+  - Protobuf (3.6.1)
+  - React (0.11.0):
+    - React/Core (= 0.11.0)
+  - react-native-contacts (2.2.2):
+    - React
+  - React/Core (0.11.0)
 
 DEPENDENCIES:
   - Firebase/Auth (~> 5.3.0)
   - Firebase/Core (~> 5.3.0)
+  - Firebase/Messaging (~> 5.3.0)
+  - react-native-contacts (from `../node_modules/react-native-contacts`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -40,9 +58,16 @@ SPEC REPOS:
     - FirebaseAuth
     - FirebaseCore
     - FirebaseInstanceID
+    - FirebaseMessaging
     - GoogleToolboxForMac
     - GTMSessionFetcher
     - nanopb
+    - Protobuf
+    - React
+
+EXTERNAL SOURCES:
+  react-native-contacts:
+    :path: "../node_modules/react-native-contacts"
 
 SPEC CHECKSUMS:
   Firebase: 68afeeb05461db02d7c9e3215cda28068670f4aa
@@ -50,10 +75,14 @@ SPEC CHECKSUMS:
   FirebaseAuth: 463b8ce33bd5d05f706dcd4615499e3212b4132b
   FirebaseCore: 62f1b792a49bb9e8b4073f24606d2c93ffc352f0
   FirebaseInstanceID: f3f0657372592ecdfdfe2cac604a5a75758376a6
+  FirebaseMessaging: 6894b8fe0a0cf26c3b13dad729f1131654ae0bdb
   GoogleToolboxForMac: 91c824d21e85b31c2aae9bb011c5027c9b4e738f
   GTMSessionFetcher: 0c4baf0a73acd0041bf9f71ea018deedab5ea84e
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  Protobuf: 1eb9700044745f00181c136ef21b8ff3ad5a0fd5
+  React: ab1a2e21deb34965c38328d5ec40cc7d12c6050a
+  react-native-contacts: 1a8913219e54d1fa20e817b99d9b42b9ec98558d
 
-PODFILE CHECKSUM: b88288bbee8296aa3836c31ef06415a53f3f055e
+PODFILE CHECKSUM: a4f24552b47e2fae9591b6721ffebe276df41aeb
 
 COCOAPODS: 1.5.3

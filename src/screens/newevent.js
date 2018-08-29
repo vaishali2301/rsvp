@@ -32,9 +32,19 @@ export default class NewEvent extends Component {
         console.error("Error adding event: ", error);
       });
   };
+
   render() {
+    // description: "",
+    //   attending: {userId1: true, userId2: true},
+    //   notattending: {userId3: true}
     const { eventname } = this.state;
     const { navigate } = this.props.navigation;
+    // var eventsRef = ref.child("events");
+    // eventsRef.push({
+    //   description: "",
+    //   attending: ,
+    //   notattending:
+    // });
     return (
       <Container>
         <Header>

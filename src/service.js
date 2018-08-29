@@ -84,6 +84,20 @@ export const Events = {
         return docRef.id;
       });
   },
+  respond(event, type) {
+    console.log(event, type);
+    //type attending or notattending
+    var userId = firebase.auth().currentUser.uid;
+    var userUp = {};
+    userUp[`events.${event}.${type}.${userId}`] = true;
+    return db
+      .collection("groups")
+      .doc("groupA")
+      .update(userUp)
+      .then(docRef => {
+        //
+      });
+  },
   delete(index) {
     db.collection("groups")
       .doc("groupA")

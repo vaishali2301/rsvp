@@ -15,8 +15,14 @@ import {
   View
 } from "native-base";
 import { TouchableOpacity } from "react-native";
+import { Events } from "./../service";
 export default class Eventformat extends Component {
   state = {};
+  addAttend = (eventname, response) => {
+    Events.respond(eventname, response).then(function() {
+      console.log("Response successfully added!");
+    });
+  };
   render() {
     const { model } = this.props;
     const { navigate } = this.props.navigation;
@@ -29,12 +35,18 @@ export default class Eventformat extends Component {
         </CardItem>
         <View style={{ flexDirection: "row" }}>
           <Left>
-            <Button transparent>
+            <Button
+              transparent
+              onPress={() => this.addAttend(model.eventname, "yes")}
+            >
               <Text>Yes</Text>
             </Button>
           </Left>
           <Right>
-            <Button transparent>
+            <Button
+              transparent
+              onPress={() => this.addAttend(model.eventname, "no")}
+            >
               <Text>No</Text>
             </Button>
           </Right>

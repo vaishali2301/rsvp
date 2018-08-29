@@ -29,7 +29,7 @@ var group = [
 var events = [
   {
     type: "Birthday",
-    eventname: "Birthday on Wednesday, 22nd August,2018 5pm at McDonald's"
+    eventname: "event1"
   },
   {
     type: "Anniversary",
