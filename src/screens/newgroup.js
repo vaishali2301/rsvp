@@ -1,13 +1,11 @@
 import React, { Component } from "react";
 import {
   Container,
-  Content,
   Header,
   Left,
   Body,
   Right,
   Button,
-  Icon,
   Title,
   View,
   Text,
@@ -19,13 +17,17 @@ import Contacts from "react-native-contacts";
 export default class NewGroup extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      groupname: "",
-      contacts: []
-    };
+    this.state = { groupname: "", contacts: [] };
   }
   addGroupname = groupname => {
-    Tasks.save(groupname)
+    let participants = [];
+    this.state.contacts.map(contact => {
+      if (contact.checked) {
+        console.log(contact);
+        participants.push(contact.phoneNumbers[0].number);
+      }
+    });
+    Tasks.save(groupname, participants)
       .then(function() {
         console.log("Group successfully added!");
       })
@@ -41,6 +43,7 @@ export default class NewGroup extends Component {
       this.setState({ contacts });
     });
   }
+  addParticipant = () => {};
 
   render() {
     const { groupname } = this.state;
@@ -103,7 +106,7 @@ export default class NewGroup extends Component {
             })}
           </View>
 
-          <Button full>
+          <Button full onPress={() => this.addGroupname(groupname)}>
             <Text>Done</Text>
           </Button>
         </View>

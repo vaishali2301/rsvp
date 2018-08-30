@@ -2,11 +2,6 @@ import firebase from "react-native-firebase";
 import { firebaseApp } from "./config";
 var db = firebaseApp.firestore();
 db.settings({ timestampsInSnapshots: true });
-// db.collection("users").add({
-//   groupname: "GeekyAnts Spammers",
-//   image:
-//     "https://t4.ftcdn.net/jpg/01/18/03/33/500_F_118033377_JKQA3UFE4joJ1k67dNoSmmoG4EsQf9Ho.jpg"
-// });
 
 const firebaseMethods = {
   save: username => {
@@ -18,12 +13,6 @@ const firebaseMethods = {
   }
 };
 
-// var groupRef = db
-//   .collection("groups")
-//   .doc("groupA")
-//   .collection("events")
-//   .doc("event1");
-
 export const Tasks = {
   all(callback) {
     var docRef = db.collection("groups");
@@ -31,17 +20,18 @@ export const Tasks = {
     docRef.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         console.log(doc.id, " => ", doc.data());
-        arr.push({ key: doc.id, text: doc.data().text });
+        arr.push({ key: doc.id, text: doc.data().name });
       });
       callback(arr);
     });
   },
-  save(tasks) {
+  save(tasks, users) {
     console.log(tasks);
     return db
       .collection("groups")
       .add({ name: tasks })
       .then(docRef => {
+        docRef.update({ users });
         return docRef.id;
       });
   },
@@ -59,32 +49,31 @@ export const Tasks = {
 };
 
 export const Events = {
-  all(callback) {
-    var docRef = db
-      .collection("groups")
-      .doc("groupA")
-      .collection("events");
+  all(groupname, callback) {
+    var docRef = db.collection("groups").doc(groupname);
     let arr = [];
     docRef.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         console.log(doc.id, " => ", doc.data());
-        arr.push({ key: doc.id, text: doc.data().text });
+        arr.push({ key: doc.id, text: doc.data().name });
       });
       callback(arr);
     });
   },
-  save(tasks) {
+  save(groupname, tasks) {
     console.log(tasks);
+    var userId = firebase.auth().currentUser.uid;
+    var userUp = {};
+    userUp[`events.${event}`] = { attending: {}, notattending: {} };
     return db
       .collection("groups")
-      .doc("groupA")
-      .collection("events")
-      .add({ name: tasks })
+      .doc(groupname)
+      .update(userUp)
       .then(docRef => {
         return docRef.id;
       });
   },
-  respond(event, type) {
+  respond(groupname, event, type) {
     console.log(event, type);
     //type attending or notattending
     var userId = firebase.auth().currentUser.uid;
@@ -92,7 +81,7 @@ export const Events = {
     userUp[`events.${event}.${type}.${userId}`] = true;
     return db
       .collection("groups")
-      .doc("groupA")
+      .doc(groupname)
       .update(userUp)
       .then(docRef => {
         //
@@ -112,14 +101,5 @@ export const Events = {
       });
   }
 };
-
-// var Ref = db.collection("groups").doc("groupA");
-// Ref.delete()
-//   .then(function(docRef) {
-//     console.log("Document written with ID: ", docRef.id);
-//   })
-//   .catch(function(error) {
-//     console.error("Error adding document: ", error);
-//   });
 
 export default firebaseMethods;

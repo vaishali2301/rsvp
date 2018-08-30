@@ -1,29 +1,9 @@
 var group = [
-  {
-    groupname: "GeekyAnts Spammers",
-    image:
-      "https://t4.ftcdn.net/jpg/01/18/03/33/500_F_118033377_JKQA3UFE4joJ1k67dNoSmmoG4EsQf9Ho.jpg"
-  },
-  {
-    groupname: "GeekyAnts",
-    image:
-      "https://t4.ftcdn.net/jpg/01/18/03/33/500_F_118033377_JKQA3UFE4joJ1k67dNoSmmoG4EsQf9Ho.jpg"
-  },
-  {
-    groupname: "Family Group",
-    image:
-      "https://t4.ftcdn.net/jpg/01/18/03/33/500_F_118033377_JKQA3UFE4joJ1k67dNoSmmoG4EsQf9Ho.jpg"
-  },
-  {
-    groupname: "College Group",
-    image:
-      "https://t4.ftcdn.net/jpg/01/18/03/33/500_F_118033377_JKQA3UFE4joJ1k67dNoSmmoG4EsQf9Ho.jpg"
-  },
-  {
-    groupname: "School Group",
-    image:
-      "https://t4.ftcdn.net/jpg/01/18/03/33/500_F_118033377_JKQA3UFE4joJ1k67dNoSmmoG4EsQf9Ho.jpg"
-  }
+  { groupname: "GeekyAnts Spammers" },
+  { groupname: "GeekyAnts" },
+  { groupname: "Family Group" },
+  { groupname: "College Group" },
+  { groupname: "School Group" }
 ];
 
 var events = [

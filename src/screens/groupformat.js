@@ -23,7 +23,12 @@ export default class Groupformat extends Component {
       <View>
         <ListItem avatar>
           <Left>
-            <Thumbnail source={{ uri: model.image }} />
+            <Thumbnail
+              source={{
+                uri:
+                  "https://t4.ftcdn.net/jpg/01/18/03/33/500_F_118033377_JKQA3UFE4joJ1k67dNoSmmoG4EsQf9Ho.jpg"
+              }}
+            />
           </Left>
 
           <TouchableOpacity onPress={() => navigate("Show2")}>

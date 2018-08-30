@@ -15,14 +15,10 @@ export default class Showgroup extends Component {
             <Text>Make a New Group</Text>
           </Button>
         </View>
-        {group.map((data, key) => {
+        {group.map(data => {
           console.log("data", data);
           return (
-            <Groupformat
-              key={key}
-              model={data}
-              navigation={this.props.navigation}
-            />
+            <Groupformat model={data} navigation={this.props.navigation} />
           );
         })}
       </ScrollView>
