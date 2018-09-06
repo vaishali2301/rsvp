@@ -1,12 +1,13 @@
 import React, { Component } from "react";
-import { View, Button, Text, TextInput, Image, Dimensions } from "react-native";
+import { View, Button, Text, TextInput, Image, TouchableHighlight,Dimensions } from "react-native";
 
 import firebase from "react-native-firebase";
+import { Thumbnail,Header } from "native-base";
 
 const successImageUri =
   "https://cdn.pixabay.com/photo/2015/06/09/16/12/icon-803718_1280.png";
 
-export default class PhoneAuthTest extends React.Component {
+export default class PhoneAuth extends React.Component {
   // static navigationOptions = { title: "Welcome" };
 
   constructor(props) {
@@ -91,23 +92,71 @@ export default class PhoneAuthTest extends React.Component {
 
     return (
       <View style={{}}>
-        <Image
-          style={{ width: 300, height: 300, justifyContent: "center" }}
-          source={{
-            uri:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQE_Pp2ua7E3xjyle0ASm2FPgX-Uu8ClAwqyIuerjimbn1phB0Z"
-          }}
-        />
-        <Text style={{ textAlign: "center" }}>Enter phone number:</Text>
-        <TextInput
-          autoFocus
-          style={{ height: 40, textAlign: "center" }}
-          onChangeText={value => this.setState({ phoneNumber: value })}
-          placeholder={"Phone number ... "}
-          value={phoneNumber}
-        />
 
-        <Button title="Sign In" color="green" onPress={this.signIn} />
+
+        <View style={{ justifyContent:"center",alignSelf: "center",backgroundColor: "#535288", width: Dimensions.get("window").width,height:(Dimensions.get("window").height)/2}}>
+          <Image
+            style={{
+              width: 200,
+              height: 200,
+              resizeMode: "contain",
+              alignSelf: "center"
+            }}
+            source={require("../../phoneimage.png")}
+          />
+        
+        
+        </View>
+
+
+        <View style={{ height:(Dimensions.get("window").height) / 2 }}>
+        
+        
+           <View style={{padding:10}}>
+               <Text style={{  marginTop:20,fontSize: 25, textAlign: "left" }}>
+                India(+91)</Text>
+            <View style={{padding:5,
+              borderBottomColor: "black",
+              borderBottomWidth: 1}}></View>
+              <View style={{margin:10}}></View>
+               <TextInput
+               autoFocus
+               style={{ fontSize:25, textAlign: "left" }}
+               onChangeText={value => this.setState({ phoneNumber: value })}
+               placeholder={"Your phone number ... "}
+               value={phoneNumber}
+            />
+            <View style={{padding:5,
+              borderBottomColor: "black",
+              borderBottomWidth: 1}}></View>
+            <View style={{ margin: 10 }}></View>
+          <Text style={{textAlign:"center", fontSize:15}}>We will send you a One time SMS</Text>
+            <Text style={{ textAlign: "center", fontSize: 15 }}>Carrier rates may apply</Text>
+            <View style={{ padding: 30}}>
+            <TouchableHighlight
+              style={{
+                height: 40,
+                width: 160,
+                borderRadius: 10,
+                backgroundColor: "#535288",
+                alignSelf:"center",
+                
+              }}
+            >
+              <Button
+                title="Sign In"
+                onPress={this.signIn}
+                color="#D4D5D8"
+                alignItems="center"
+              
+              />
+            </TouchableHighlight>
+            </View>
+            
+          </View>
+
+      </View>
+
       </View>
     );
   }
@@ -117,37 +166,51 @@ export default class PhoneAuthTest extends React.Component {
 
     if (!message.length) return null;
 
-    return (
-      <Text
-        style={{
-          padding: 5,
-          backgroundColor: "#000",
-          color: "#fff"
-        }}
-      >
-        {message}
-      </Text>
-    );
+    // return (
+    //   <Text
+    //     style={{
+    //       padding: 5,
+    //       backgroundColor: "#000",
+    //       color: "#fff"
+    //     }}
+    //   >
+    //     {message}
+    //   </Text>
+    // );
   }
 
   renderVerificationCodeInput() {
     const { codeInput } = this.state;
 
     return (
-      <View style={{ marginTop: 25, padding: 25 }}>
-        <Text>Enter verification code below:</Text>
+      <View style={{ alignSelf: "center", height: Dimensions.get("window").height, width: Dimensions.get("window").width, backgroundColor: "#535288" }}>
+        <Text style={{ justifyContent: "center", marginTop: 50, padding: 10, fontSize: 30, color: "white", textAlign: "center" }}>Verification Code</Text>
+        <Text style={{ color: "#D4D5D8",padding:20, textAlign: "center", fontSize: 15 }}>Please type the verification code sent to your phone number</Text>
         <TextInput
           autoFocus
-          style={{ height: 40, marginTop: 15, marginBottom: 15 }}
+          style={{fontSize:25, padding: 15, alignSelf:"center" }}
           onChangeText={value => this.setState({ codeInput: value })}
           placeholder={"Code ... "}
           value={codeInput}
         />
-        <Button
-          title="Confirm Code"
-          color="#841584"
-          onPress={this.confirmCode}
-        />
+        <TouchableHighlight
+          style={{
+            height: 40,
+            width: 160,
+            borderRadius: 10,
+            backgroundColor: "#D4D5D8",
+            alignSelf: "center",
+
+          }}
+        >
+          <Button
+            title="Confirm Code"
+            onPress={this.confirmCode}
+            color="#535288"
+            alignItems="center"
+
+          />
+        </TouchableHighlight>
       </View>
     );
   }
@@ -194,3 +257,8 @@ export default class PhoneAuthTest extends React.Component {
     );
   }
 }
+
+
+
+
+

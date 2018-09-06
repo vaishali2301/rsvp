@@ -5,14 +5,15 @@ import {
   Left,
   Body,
   Right,
-  Button,
   Title,
   View,
+  Button,
   Text,
+  ListItem,
   CheckBox
 } from "native-base";
-import { Tasks } from "./../service";
-import { Image, TextInput } from "react-native";
+import { Tasks } from "../Service";
+import { Image, TextInput,ScrollView,TouchableHighlight,Dimensions } from "react-native";
 import Contacts from "react-native-contacts";
 export default class NewGroup extends Component {
   constructor(props) {
@@ -52,8 +53,8 @@ export default class NewGroup extends Component {
       <Container>
         <Header>
           <Left>
-            <Button transparent onPress={() => navigate("Groups")}>
-              <Text>Back</Text>
+            <Button  transparent onPress={() => navigate("Groups")}>
+              <Text style={{ color: "#535288" }}>Back</Text>
             </Button>
           </Left>
           <Body>
@@ -61,7 +62,7 @@ export default class NewGroup extends Component {
           </Body>
           <Right>
             <Button transparent onPress={() => navigate("Groups")}>
-              <Text>Cancel</Text>
+              <Text style={{ color: "#535288" }}>Cancel</Text>
             </Button>
           </Right>
         </Header>
@@ -77,19 +78,22 @@ export default class NewGroup extends Component {
               />
               <TextInput
                 autoFocus
-                style={{ textAlign: "center", fontSize: 30 }}
+                style={{ textAlign: "center", fontSize: 30, padding:10 }}
                 onChangeText={value => this.setState({ groupname: value })}
                 placeholder={"Type group subject.. "}
                 value={groupname}
-                onSubmitEditing={() => this.addGroupname(groupname)}
               />
             </View>
-            <Text style={{ fontSize: 30 }}>Participants:</Text>
+            <Text style={{ alignSelf:"center",fontSize: 30,color:"#535288", padding: 10 }}>Participants:</Text>
+            <View>
+            <ScrollView>
             {this.state.contacts.map((data, index) => {
               console.log(data);
               return (
+                
+                <ListItem>
                 <View style={{ flexDirection: "row" }}>
-                  <CheckBox checked={data.checked} />
+                    <CheckBox checked={data.checked} />
                   <Text
                     style={{ marginLeft: 20 }}
                     onPress={() => {
@@ -102,15 +106,27 @@ export default class NewGroup extends Component {
                     {data.givenName}
                   </Text>
                 </View>
+                </ListItem>
+                
               );
             })}
+            </ScrollView>
+            </View>
           </View>
-
-          <Button full onPress={() => this.addGroupname(groupname)}>
-            <Text>Done</Text>
+          <Button
+            full
+            onPress={() => {
+              this.addGroupname(groupname);
+              this.props.navigation.goBack();
+            }}
+            style={{ backgroundColor:"#535288"}}
+          >
+            <Text style={{ color:"#D4D5D8"}}>Done</Text>
           </Button>
         </View>
       </Container>
     );
   }
 }
+
+

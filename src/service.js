@@ -1,5 +1,5 @@
 import firebase from "react-native-firebase";
-import { firebaseApp } from "./config";
+import { firebaseApp } from "./Config";
 var db = firebaseApp.firestore();
 db.settings({ timestampsInSnapshots: true });
 
@@ -15,17 +15,26 @@ const firebaseMethods = {
 
 export const Tasks = {
   all(callback) {
-    var docRef = db.collection("groups");
+    var user = firebase.auth().currentUser;
+    var docRef = db
+      .collection("groups")
+      .where("users", "array-contains", user.phoneNumber);
     let arr = [];
     docRef.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         console.log(doc.id, " => ", doc.data());
-        arr.push({ key: doc.id, text: doc.data().name });
+        arr.push({
+          key: doc.id,
+          text: doc.data().name,
+          events: doc.data().events
+        });
       });
       callback(arr);
     });
   },
   save(tasks, users) {
+    var user = firebase.auth().currentUser.phoneNumber;
+    users.push(user);
     console.log(tasks);
     return db
       .collection("groups")
@@ -55,49 +64,69 @@ export const Events = {
     docRef.get().then(function(querySnapshot) {
       querySnapshot.forEach(function(doc) {
         console.log(doc.id, " => ", doc.data());
-        arr.push({ key: doc.id, text: doc.data().name });
+        arr.push({
+          key: doc.id,
+          text: doc.data().name,
+          events: doc.data().events
+        });
       });
       callback(arr);
     });
   },
-  save(groupname, tasks) {
-    console.log(tasks);
-    var userId = firebase.auth().currentUser.uid;
+  save(groupname, event) {
+    console.log(event);
+    var user = firebase.auth().currentUser;
     var userUp = {};
     userUp[`events.${event}`] = { attending: {}, notattending: {} };
     return db
       .collection("groups")
-      .doc(groupname)
-      .update(userUp)
-      .then(docRef => {
-        return docRef.id;
+      .where("name", "==", groupname)
+      .where("users", "array-contains", user.phoneNumber)
+      .get()
+      .then(snaphots => {
+        snaphots.forEach(snapshot => {
+          db.collection("groups")
+            .doc(snapshot.id)
+            .update(userUp);
+        });
       });
   },
   respond(groupname, event, type) {
     console.log(event, type);
-    //type attending or notattending
     var userId = firebase.auth().currentUser.uid;
     var userUp = {};
     userUp[`events.${event}.${type}.${userId}`] = true;
     return db
       .collection("groups")
-      .doc(groupname)
-      .update(userUp)
-      .then(docRef => {
-        //
+      .where("name", "==", groupname)
+      .get()
+      .then(snaphots => {
+        snaphots.forEach(snapshot => {
+          db.collection("groups")
+            .doc(snapshot.id)
+            .update(userUp);
+        });
       });
   },
-  delete(index) {
-    db.collection("groups")
-      .doc("groupA")
-      .collection("events")
-      .doc(index)
-      .delete()
-      .then(function() {
-        console.log("Document successfully deleted!");
-      })
-      .catch(function(error) {
-        console.error("Error removing document: ", error);
+  delete(groupName, eventName) {
+    console.log(groupName, eventName);
+    var userUp = {};
+    userUp[`events.${eventName}`] = firebase.firestore.FieldValue.delete();
+    return db
+      .collection("groups")
+      .where("name", "==", groupName)
+      .get()
+      .then(snaphots => {
+        snaphots.forEach(snapshot => {
+          let events = snapshot.data().events;
+          delete events[eventName];
+          // console.log(events);
+          if (events) {
+            db.collection("groups")
+              .doc(snapshot.id)
+              .update({ events: events });
+          }
+        });
       });
   }
 };

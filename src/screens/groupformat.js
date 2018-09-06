@@ -1,26 +1,22 @@
 import React, { Component } from "react";
 import {
-  Container,
-  Header,
-  Content,
-  List,
   ListItem,
   Left,
-  Body,
-  Button,
   Right,
+  Body,
   Thumbnail,
-  Text
+  Text,
+  List
 } from "native-base";
 
 import { TouchableOpacity, View } from "react-native";
-export default class Groupformat extends Component {
+export default class GroupFormat extends Component {
   state = {};
   render() {
     const { model } = this.props;
     const { navigate } = this.props.navigation;
     return (
-      <View>
+      <List>
         <ListItem avatar>
           <Left>
             <Thumbnail
@@ -30,14 +26,22 @@ export default class Groupformat extends Component {
               }}
             />
           </Left>
-
-          <TouchableOpacity onPress={() => navigate("Show2")}>
-            <Body>
-              <Text>{model.groupname}</Text>
-            </Body>
-          </TouchableOpacity>
+          <Body>
+            <TouchableOpacity
+              onPress={() =>
+                navigate("Show2", {
+                  groupName: model.text,
+                  events: model.events,
+                  refresh: this.props.refresh
+                })
+              }
+            >
+              <Text style={{ fontSize: 20,color: "#D4D5D8" }}>{model.text}</Text>
+            </TouchableOpacity>
+          </Body>
+          <Right />
         </ListItem>
-      </View>
+      </List>
     );
   }
 }

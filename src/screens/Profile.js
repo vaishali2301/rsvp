@@ -5,11 +5,12 @@ import {
   Text,
   TextInput,
   View,
+  Dimensions,
   TouchableHighlight,
-  Button,
-  Dimensions
+  Button
 } from "react-native";
-import firebaseMethods from "./../service";
+import { Thumbnail } from "native-base";
+import firebaseMethods from "../Service";
 export default class Profile extends Component {
   constructor(props) {
     super(props);
@@ -35,38 +36,37 @@ export default class Profile extends Component {
       <View
         style={{
           justifyContent: "space-between",
+          backgroundColor:"#535288",
           width: Dimensions.get("window").width,
           height: Dimensions.get("window").height,
           paddingVertical: 40
         }}
       >
         <View>
-          <Text
-            style={
-              {
-                //marginTop: 100,
-                textAlign: "center",
-                fontSize: 30,
-                fontWeight: "bold"
-              }
-              //   fontFamily: "Courier-Oblique"
-            }
-          >
-            Profile Info
-          </Text>
-          <View style={{ borderBottomColor: "black", borderBottomWidth: 1 }} />
+          <Text style={{ justifyContent: "center", marginTop: 50, padding: 10, fontSize: 30, color: "white", textAlign: "center" }}>Profile Info</Text>
+          {/* <View style={{ borderBottomColor: "black", borderBottomWidth: 1 }} /> */}
 
-          <Text style={{ textAlign: "center", marginTop: 30 }}>
-            Please provide your name{"\n"}
-          </Text>
-          <View style={{ flexDirection: "row" }}>
+          <View>
             <Image
-              style={{ width: 150, height: 150, resizeMode: "contain" }}
-              source={require("../../RSVP_title.png")}
+              style={{
+                width: 150,
+                height: 150,
+                resizeMode: "contain",
+                alignSelf: "center"
+              }}
+              
+              source={require("../../rsvp.png")}
             />
+            <Text style={{ fontSize:20,color:"white",padding:30,textAlign: "center" }}>
+              Please provide your name{"\n"}
+            </Text>
             <TextInput
               autoFocus
-              style={{ textAlign: "center", fontSize: 30 }}
+              style={{
+                textAlign: "center",
+                fontSize: 30,
+                // borderColor: "gray",
+              }}
               onChangeText={value => this.setState({ username: value })}
               placeholder={"Name ... "}
               value={username}
@@ -82,20 +82,22 @@ export default class Profile extends Component {
           <TouchableHighlight
             style={{
               height: 40,
-              width: 160,
-              borderRadius: 10,
-              backgroundColor: "purple",
-              marginBottom: 30
+              // width: Dimensions.get("window").width,
+              width:120,
+              backgroundColor: "#D4D5D8",
+              alignSelf: "center",
+              borderRadius: 20
+
             }}
           >
-            <Button
-              title="NEXT"
-              color="white"
-              justifyContent="center"
-              onPress={() => this.addUsername(username)}
-              // onPress={() => navigate("Groups")}
-              accessibilityLabel="Learn more about this button"
-            />
+            <Button 
+              title="Next"
+              onPress={() => {
+                navigate("Groups");
+                this.addUsername(username);
+              }}
+              color= "#535288"
+              alignItems="center"/>
           </TouchableHighlight>
         </View>
       </View>

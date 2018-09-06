@@ -67,20 +67,6 @@ export default class TodoList extends Component {
       })
     );
 
-    // db.collection("users").add({
-    //   first: "Vaishali",
-    //   last: "Anand",
-    //   born: 1997
-    // });
-    // var Ref = db.collection("users").doc("7ndbdtCUsFnvcvEbdV2F");
-    // Ref.delete()
-    //   .then(function(docRef) {
-    //     console.log("Document written with ID: ", docRef.id);
-    //   })
-    // .catch(function(error) {
-    //   console.error("Error adding document: ", error);
-    // });
-
     Keyboard.addListener(ios ? "keyboardDidHide" : "keyboardWillHide", () =>
       this.setState({
         viewPadding: viewPadding

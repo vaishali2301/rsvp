@@ -1,53 +1,54 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Header,
-  Content,
-  Button,
-  Card,
-  Body,
-  Left,
-  Title,
-  CardItem,
-  Text,
-  Icon,
-  Right,
-  View
-} from "native-base";
+import { Button, Card, Left, CardItem, Text, Right, View } from "native-base";
 import { TouchableOpacity } from "react-native";
-import { Events } from "./../service";
-export default class Eventformat extends Component {
+import { Events } from "../Service";
+export default class EventFormat extends Component {
   state = {};
   addAttend = (eventname, response) => {
-    Events.respond(eventname, response).then(function() {
+    Events.respond(this.props.groupName, eventname, response).then(function() {
       console.log("Response successfully added!");
     });
   };
+
   render() {
     const { model } = this.props;
     const { navigate } = this.props.navigation;
     return (
       <Card>
         <CardItem>
-          <TouchableOpacity onPress={() => navigate("Info")}>
-            <Text>{model.eventname}</Text>
+          <TouchableOpacity
+            onPress={() =>
+              navigate("Info", {
+                eventName: this.props.name,
+                groupName: this.props.groupName
+              })
+            }
+          >
+            <Text style={{ fontSize: 20,color: "#535288"}}>{this.props.name}</Text>
+            <Text>{model.type}</Text>
           </TouchableOpacity>
         </CardItem>
         <View style={{ flexDirection: "row" }}>
           <Left>
             <Button
               transparent
-              onPress={() => this.addAttend(model.eventname, "yes")}
+              onPress={() => {
+                navigate("Groups");
+                this.addAttend(this.props.name, "attending");
+              }}
             >
-              <Text>Yes</Text>
+              <Text style={{ color: "#535288" }}>Yes</Text>
             </Button>
           </Left>
           <Right>
             <Button
               transparent
-              onPress={() => this.addAttend(model.eventname, "no")}
+              onPress={() => {
+                navigate("Groups");
+                this.addAttend(this.props.name, "notattending");
+              }}
             >
-              <Text>No</Text>
+              <Text style={{ color: "#535288" }}>No</Text>
             </Button>
           </Right>
         </View>
