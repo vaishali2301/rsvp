@@ -44,17 +44,42 @@ export const Tasks = {
         return docRef.id;
       });
   },
-  delete(index) {
-    db.collection("groups")
-      .doc(index)
-      .delete()
-      .then(function() {
-        console.log("Document successfully deleted!");
+  delete(groupName) {
+    return db.collection("groups")
+      .where("name", "==", groupName)
+      .get()
+      .then(snaphots => {
+          snaphots.forEach(snapshot => {
+          db.collection("groups")
+            .doc(snapshot.id)
+            .delete();
+          });
       })
       .catch(function(error) {
         console.error("Error removing document: ", error);
       });
+  },
+  search(groupName, callback){
+    var user = firebase.auth().currentUser;
+    var docRef = db
+      .collection("groups")
+      .where("users", "array-contains", user.phoneNumber)
+      let arr = [];
+    docRef.get().then(function(querySnapshot) {
+      querySnapshot.forEach(function(doc) {
+        if (doc.data().name && doc.data().name.indexOf(groupName) > -1) {
+          arr.push({
+            key: doc.id,
+            text: doc.data().name,
+            events: doc.data().events
+          });
+        }
+      });
+      callback(arr);
+    });
+      
   }
+  
 };
 
 export const Events = {

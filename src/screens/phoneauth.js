@@ -83,9 +83,9 @@ export default class PhoneAuth extends React.Component {
     }
   };
 
-  signOut = () => {
-    firebase.auth().signOut();
-  };
+  // signOut = () => {
+  //   firebase.auth().signOut();
+  // };
 
   renderPhoneNumberInput() {
     const { phoneNumber } = this.state;
@@ -227,31 +227,10 @@ export default class PhoneAuth extends React.Component {
         {!user && confirmResult && this.renderVerificationCodeInput()}
 
         {user && (
-          <View
-            style={{
-              padding: 15,
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "white"
-            }}
-          >
-            <Image
-              source={{ uri: successImageUri }}
-              style={{ width: 100, height: 100, marginBottom: 25 }}
-            />
-            <Text style={{ fontSize: 25 }}>Signed In!</Text>
-            {/* <Text>{JSON.stringify(user)}</Text> */}
-            <Button
-              title="Continue"
-              color="red"
-              onPress={() =>
-                this.state.user.displayName
+          this.state.user.displayName
                   ? navigate("Groups")
                   : navigate("Profile")
-              }
-            />
-            <Button title="Sign Out" color="red" onPress={this.signOut} />
-          </View>
+            
         )}
       </View>
     );

@@ -63,17 +63,12 @@ export default class EventInfo extends Component {
           </Card>
           <Card>
             <CardItem >
-              <Text>Attending</Text>
+              <Text>Attending : {this.props.navigation.state.params.attending}</Text>
             </CardItem>
           </Card>
           <Card>
             <CardItem>
-              <Text>Not Attending</Text>
-            </CardItem>
-          </Card>
-          <Card>
-            <CardItem>
-              <Text>Yet to RSVP</Text>
+              <Text>Not Attending : {this.props.navigation.state.params.notattending}</Text>
             </CardItem>
           </Card>
         </Content>

@@ -13,12 +13,15 @@ export default class EventFormat extends Component {
   render() {
     const { model } = this.props;
     const { navigate } = this.props.navigation;
+    console.log(Object.keys({}).length);
     return (
       <Card>
         <CardItem>
           <TouchableOpacity
             onPress={() =>
               navigate("Info", {
+                attending: Object.keys({}).length,
+                notattending: Object.keys({}).length,
                 eventName: this.props.name,
                 groupName: this.props.groupName
               })

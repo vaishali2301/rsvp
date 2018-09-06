@@ -12,16 +12,23 @@ import {
   Title
 } from "native-base";
 import { map } from "lodash";
-import { Events } from "../Service";
 import { withNavigationFocus } from "react-navigation-is-focused-hoc";
 import EventFormat from "./EventFormat";
+import { Tasks } from "../Service";
 
 class ShowEvent extends Component {
   constructor() {
     super();
-    this.state = { tasks: [] };
-    this.state = { active: "false" };
+    this.state = { tasks: [], active: "false",groupname: ""};
   }
+   deleteGroupname = groupname => {
+    Tasks.delete(this.props.navigation.state.params.groupName)
+      .then(function() {
+        console.log("Group successfully deleted!");
+      })
+      .catch(function(error) {
+      });
+  };
   componentDidMount() {
     console.log(this.props.navigation.state.params);
   }
@@ -48,7 +55,9 @@ class ShowEvent extends Component {
             </Body>
 
             <Right>
-              <Button transparent>
+              <Button transparent onPress={() => {
+                    this.deleteGroupname(this.props.navigation.state.params.groupName);  
+                    navigate("Groups")}}>
                 <Text style={{ color: "#535288" }}>Delete</Text>
               </Button>
             </Right>
@@ -81,3 +90,4 @@ class ShowEvent extends Component {
   }
 }
 export default withNavigationFocus(ShowEvent);
+
